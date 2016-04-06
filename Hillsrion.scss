@@ -116,18 +116,17 @@ justify-content: space-around;
  * Desc : Handles flex-start value into justify-content and align-items properties according to the axis to want to place your element and the the direction of your flex container, put none if you wanna use axis xy .
  * Is Used as a component for Level 2 Mixin flex()
  */
- @mixin flex-start($axis,$direction) {
+ @mixin flex-start($axis:"",$direction: "") {
    display: flex;
    float: none;
-   @if $axis==x and $direction==row {
-     justify-content: flex-start;
-   } @else if $axis==x and $direction==column{
-     align-items: flex-start;
-   } @else if $axis==y and $direction==row {
+   @if $direction==""{
+     $direction: row;
+   }
+   @if ($axis==x and $direction==column) or ($axis==y and $direction==row) {
      align-items: flex-start;
    } @else if $axis==y and $direction==column {
      justify-content: flex-start;
-   } @else if $axis==xy {
+   } @else if $axis=="" and $direction==row {
      align-items: flex-start;
      justify-content: flex-start;
    }
@@ -138,53 +137,48 @@ justify-content: space-around;
   * Desc : Handles center value into justify-content and align-items properties according to the axis to want to place your element and the the direction of your flex container, put none if you wanna use axis xy
   * Is Used as a component for Level 2 Mixin flex()
   */
- @mixin flex-middle($axis,$direction) {
-   display: flex;
-   float: none;
-   @if $axis==x and $direction==row {
-     justify-content: center;
-   } @else if $axis==x and $direction==column{
-     align-items: center;
-   } @else if $axis==y and $direction==row {
-     align-items: center;
-   } @else if $axis==y and $direction==column {
-     justify-content: center;
-   } @else if $axis==xy {
-     align-items: center;
-     justify-content: center;
-   }
- }
+@mixin flex-middle($axis:"",$direction: "") {
+  display: flex;
+  float: none;
+  @if $direction==""{
+    $direction: row;
+  }
+  @if ($axis==x and $direction==column) or ($axis==y and $direction==row) {
+    align-items: center;
+  } @else if $axis==y and $direction==column {
+    justify-content: center;
+  } @else if $axis=="" and $direction==row {
+    align-items: center;
+    justify-content: center;
+  }
+}
 
  /**
   * Mixin Level 1.
   * Desc : Handles flex-end value into justify-content and align-items properties according to the axis to want to place your element and the the direction of your flex container, put none if you wanna use axis xy
   * Is Used as a component for Level 2 Mixin flex()
   */
- @mixin flex-end($axis,$direction) {
-   display: flex;
-   float: none;
-   @if $axis==x and $direction==row {
-     justify-content: flex-end;
-   } @else if $axis==x and $direction==column{
-     align-items: flex-end;
-   } @else if $axis==y and $direction==row {
-     align-items: flex-end;
-   } @else if $axis==y and $direction==column {
-     justify-content: flex-end;
-   } @else if $axis==xy {
-     align-items: flex-end;
-     justify-content: flex-end;
-   }
- }
+  @mixin flex-end($axis:"",$direction: "") {
+    display: flex;
+    float: none;
+    @if $direction==""{
+      $direction: row;
+    }
+    @if ($axis==x and $direction==column) or ($axis==y and $direction==row) {
+      align-items: flex-end;
+    } @else if $axis==y and $direction==column {
+      justify-content: flex-end;
+    } @else if $axis=="" and $direction==row {
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+  }
 
  /**
   * Mixin Level 1.
   * Desc : Useful for button, switches the color of text and the background-color. put $bg-enabled to true to define your background-color.
   */
 @mixin colorToBg($color-text, $color-bg, $time, $easing, $bg-enabled) {
-  @if variable-exists($color-bg) {
-    background-color: blue;
-  }
   transition: background-color $time, color $time $easing;
   &:hover {
     background-color: $color-text;
@@ -224,7 +218,10 @@ justify-content: space-around;
   * $direction (arguments: row, column) : Gives the current direction of the flex container, row or column.
   */
 
-  @mixin flex-position($position, $axis, $direction) {
+  @mixin flex-position($position, $axis, $direction:"") {
+    @if $direction=="" {
+      $direction: row;
+    }
     @if $position==start {
       @include flex-start($axis, $direction);
     } @else if $position==center {
