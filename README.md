@@ -17,6 +17,6 @@ But also the optional arguments, I plan to make default arguments in some mixins
 
 Feel very free to contact me if you have any question, something you don't understand, or an advice for me.
 
-Mail : ismael.sebbane@gmail.com \n
-Twitter : @Hillsrion \n
+Mail : ismael.sebbane@gmail.com 
+Twitter : @Hillsrion
 Website : ismaelsebbane.fr
