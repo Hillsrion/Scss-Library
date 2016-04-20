@@ -91,6 +91,7 @@ justify-content: space-around;
        border-left: solid $border-value transparent;
        border-right: solid $border-value transparent;
        left: 0;
+       top: 100%;
        right: 0;
      } @else if $position==right {
        left: 100%;
@@ -178,7 +179,7 @@ justify-content: space-around;
   * Mixin Level 1.
   * Desc : Useful for button, switches the color of text and the background-color. put $bg-enabled to true to define your background-color.
   */
-@mixin colorToBg($color-text, $color-bg, $time, $easing, $bg-enabled) {
+@mixin colorToBg($color-text, $color-bg, $time, $easing, $bg-enabled:"") {
   transition: background-color $time, color $time $easing;
   &:hover {
     background-color: $color-text;
@@ -204,7 +205,17 @@ justify-content: space-around;
   width: $width;
   height: $height;
 }
+/**
+ * Mixin Level 1.
+ * Desc : Set display to none if width reaches the breakpoint given in argument
+ * $breakpoint has to be a string defining the breakpoint rule. (e.g (max-width: 500px))
+ */
 
+@mixin hidden($breakpoint) {
+  @media #{$breakpoint} {
+    display: none;
+  }
+}
 /* ==========================================================================
    Level 2 Mixins.
    ========================================================================== */
