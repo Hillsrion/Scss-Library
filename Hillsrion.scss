@@ -42,11 +42,6 @@ So mixins level 2 includes level 1 mixins in the code. When it's the case, it's 
   height: 100vh;
 }
 
-@mixin fullsize() {
-  width: 100%;
-  height: 100%;
-}
-
  // Is Used as a component for Level 2 Mixin flex()
 @mixin flex-around() {
 display: flex;
@@ -201,9 +196,14 @@ justify-content: space-around;
  * Desc : Sets width and height with width and height wanted values given in parameter.
  */
 
-@mixin size($width, $height) {
-  width: $width;
-  height: $height;
+@mixin size($full:"",$width, $height) {
+  @if $full==full {
+    width: 100%;
+    height: 100%;
+  } @else {
+    width: $width;
+    height: $height;
+  }
 }
 /**
  * Mixin Level 1.
@@ -211,7 +211,7 @@ justify-content: space-around;
  */
 
 @mixin hidden($value) {
-  $breakpoint: '(max-width: #{$value})';
+  $breakpoint: 'screen and (max-width: #{$value})';
   @media #{$breakpoint} {
     display: none;
   }
