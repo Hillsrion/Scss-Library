@@ -207,11 +207,11 @@ justify-content: space-around;
 }
 /**
  * Mixin Level 1.
- * Desc : Set display to none if width reaches the breakpoint given in argument
- * $breakpoint has to be a string defining the breakpoint rule. (e.g (max-width: 500px))
+ * Desc : Set display to none if width reaches the breakpoint value given in argument
  */
 
-@mixin hidden($breakpoint) {
+@mixin hidden($value) {
+  $breakpoint: '(max-width: #{$value})';
   @media #{$breakpoint} {
     display: none;
   }
