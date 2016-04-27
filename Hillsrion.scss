@@ -41,6 +41,11 @@ So mixins level 2 includes level 1 mixins in the code. When it's the case, it's 
   height: 100vh;
 }
 
+@mixin reset() {
+  padding: 0;
+  margin: 0;
+}
+
  // Is Used as a component for Level 2 Mixin flex()
 @mixin flex-around() {
 display: flex;
@@ -85,7 +90,7 @@ justify-content: space-around;
        border-left: solid $border-value transparent;
        border-right: solid $border-value transparent;
        left: 0;
-       top: 100%;
+       top: calc(100% - 1px);
        right: 0;
      } @else if $position==right {
        left: 100%;
